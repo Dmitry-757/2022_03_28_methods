@@ -53,11 +53,11 @@ public class dz_61_2 {
         System.out.println();
     }
 
-    public static void meth(int dimY, int dimX,  double agregate){
+    public static void meth(int dimY, int dimX,  double fill){
         double[][] arr = new double[dimY][dimX];
         for (int i = 0; i < dimY; i++) {
             for (int j = 0; j < dimX; j++) {
-                arr[i][j] = agregate;
+                arr[i][j] = fill;
             }
         }
 

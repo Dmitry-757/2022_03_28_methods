@@ -41,9 +41,9 @@ public class dz_61_3 {
         Random rnd = new Random();
         StringBuilder buf = new StringBuilder();
         for (int i = 0; i < numWord; i++) {
-            int strimSize = rnd.nextInt(3,10);
+            int streamSize = rnd.nextInt(3,10);
             rnd
-                .ints(strimSize,97, 122) //long streamSize, int randomNumberOrigin, int randomNumberBound)
+                .ints(streamSize,97, 122) //long streamSize, int randomNumberOrigin, int randomNumberBound
                 .forEach(v -> buf.append((char)v));
             if (i == (numWord - 1)){
                 buf.append(".");
@@ -53,7 +53,7 @@ public class dz_61_3 {
             }
         }
 //        System.out.println(buf.toString());
-        String firstLetter = new String(buf.substring(0, 1).toString().toUpperCase());
+        String firstLetter = buf.substring(0, 1).toUpperCase();
         buf.replace(0,1, firstLetter);
         return buf.toString();
     }

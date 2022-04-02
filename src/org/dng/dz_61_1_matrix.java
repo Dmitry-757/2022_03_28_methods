@@ -54,7 +54,7 @@ public class dz_61_1_matrix {
     public static int[][] randomMatrix(int dimY, int dimX, int rndRange) {
         if ((dimY < 1) || (dimX < 1)) {
             System.out.println("Wrong dimension!");
-            int[][] matrix = new int[0][0];
+            int[][] matrix = null;
             return matrix;
         }
         int[][] matrix = new int[dimY][dimX];
@@ -114,9 +114,7 @@ public class dz_61_1_matrix {
             for (int i = 0; i < dimY; i++) {
                 if (i == y) continue;
                 int z = (i < y) ? i : (i - 1);
-                for (int j = 1; j < dimX; j++) {
-                    minor[z][j - 1] = matrix[i][j];
-                }
+                System.arraycopy(matrix[i], 1, minor[z], 0, minor[z].length);
             }
 //            printMatrix(minor);
 //            System.out.println("a = " + (int)Math.pow((-1),(1+y+1))*a);
