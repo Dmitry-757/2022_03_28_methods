@@ -1,6 +1,5 @@
 package org.dng;
 
-import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 
 class dz_61_1_matrixTest {
