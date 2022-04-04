@@ -1,6 +1,7 @@
 package org.dng;
 
 import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 
 class dz_61_1_matrixTest {
 
@@ -11,7 +12,7 @@ class dz_61_1_matrixTest {
 
         int[][] expected = {{18, 20, 22, 24},{26,28,30,32},{34,36,38,40},{42,44,46,48}};
         int[][] actual = dz_61_1_matrix.matrixAddition(m1, m2);
-        Assert.assertArrayEquals(expected, actual);
+        Assertions.assertArrayEquals(expected, actual);
     }
 
 
@@ -29,11 +30,11 @@ class dz_61_1_matrixTest {
         //another test
         try {
             dz_61_1_matrix.matrixAddition(m1, m2);
-            Assert.fail("Exception was expected!");
+            Assertions.fail("Exception was expected!");
         }
         catch (IllegalArgumentException ex){
             System.out.println("Test done. Caught exception = "+ ex.getMessage());
-            Assert.assertNotEquals("", "Error! Matrix dimensions must be equal!");
+            Assertions.assertNotEquals("", "Error! Matrix dimensions must be equal!");
         }
 
     }
@@ -45,7 +46,7 @@ class dz_61_1_matrixTest {
 
         int expected = 16;
         int actual = dz_61_1_matrix.det(m1);
-        Assert.assertEquals(expected, actual);
+        Assertions.assertEquals(expected, actual);
     }
 
     @org.junit.jupiter.api.Test
@@ -53,11 +54,11 @@ class dz_61_1_matrixTest {
         int[][] m1 = {{2,2,3,4},{5,6,7,8},{9,10,10,12},{13,14,15,16},{1,2,3,4}};
         try {
             dz_61_1_matrix.det(m1);
-            Assert.fail("Exception was expected!");
+            Assertions.fail("Exception was expected!");
         }
         catch (IllegalArgumentException ex){
             System.out.println("Test done. Caught exception = "+ ex.getMessage());
-            Assert.assertNotEquals("", "Error. The matrix is not square! determinant can`t be found!");
+            Assertions.assertNotEquals("", "Error. The matrix is not square! determinant can`t be found!");
         }
     }
 
