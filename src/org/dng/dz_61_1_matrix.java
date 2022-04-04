@@ -10,7 +10,6 @@ import java.util.Arrays;
  * ■ 2 создания нулевой матрицы;
  * ■ 3 сложение матриц;
  * ■ 4 умножения матриц;
- * ■ 5 умножение матрицы на скаляр;
  * ■ 6 определение детерминанта матрицы;
  * ■ 7 вывод матрицы на консоль
  */
@@ -51,11 +50,10 @@ public class dz_61_1_matrix {
         return matrix;
     }
 
-    public static int[][] randomMatrix(int dimY, int dimX, int rndRange) {
+    public static int[][] randomMatrix(int dimY, int dimX, int rndRange) throws IllegalArgumentException {
         if ((dimY < 1) || (dimX < 1)) {
-            System.out.println("Wrong dimension!");
-            int[][] matrix = null;
-            return matrix;
+            //System.out.println("Wrong dimension!");
+            throw new IllegalArgumentException("Wrong matrix dimension!");
         }
         int[][] matrix = new int[dimY][dimX];
         for (int i = 0; i < dimY; i++) {
@@ -66,8 +64,22 @@ public class dz_61_1_matrix {
         return matrix;
     }
 
-    public static int[][] matrixAddition(int[][] m1, int[][] m2) {
-        //lets find max dimensions of matrix
+    public static int[][] matrixAddition(int[][] m1, int[][] m2) throws IllegalArgumentException {
+        //lets compare dimensions of matrix
+        if(m1.length != m2.length){
+            throw new IllegalArgumentException("Error! Matrix dimensions must be equal!");
+        }
+        if( (m1.length == 0) ||(m2.length == 0) ){
+            throw new IllegalArgumentException("Error! Matrix dimensions must be >0 !");
+        }
+
+        for (int i = 0; i < m1.length; i++) {
+            if(m1[i].length != m2[i].length){
+                throw new IllegalArgumentException("Error! Matrix dimensions must be equal!");
+            }
+        }
+
+
         int y = Math.max(m1.length, m2.length);
         int x = 0;
         for (int[] d : m1) {
@@ -80,26 +92,17 @@ public class dz_61_1_matrix {
         int[][] matrix = new int[y][x];
         for (int i = 0; i < (y); i++) {
             for (int j = 0; j < x; j++) {
-                int a1, a2;
-                if ((i < m1.length) && (j < m1[i].length))
-                    a1 = m1[i][j];
-                else a1 = 0;
-                if ((i < m2.length) && (j < m2[i].length))
-                    a2 = m2[i][j];
-                else a2 = 0;
-
-                matrix[i][j] = a1 + a2;
+                matrix[i][j] = m1[i][j] + m2[i][j];
             }
         }
         return matrix;
     }
 
-    public static int det(int[][] matrix) {
+    public static int det(int[][] matrix) throws IllegalArgumentException {
         int rez = 0;
         int dimY = matrix.length, dimX = matrix[0].length;
         if (dimY != dimX) {
-            System.out.println("the matrix is not square! determinant can`t be found!");
-            return -11111;
+            throw new IllegalArgumentException("Error. The matrix is not square! determinant can`t be found!");
         }
 
         if ((dimY == 2) && (dimX == 2)) {
@@ -135,6 +138,7 @@ public class dz_61_1_matrix {
         System.out.println();
 
         //point 3 - matrix addition
+        //throw exception
         System.out.println("example of matrix addition...");
         int[][] m1 = randomMatrix(4, 2, 10);
         System.out.println("first matrix");
@@ -142,17 +146,57 @@ public class dz_61_1_matrix {
         int[][] m2 = randomMatrix(2, 3, 10);
         System.out.println("second matrix");
         printMatrix(m2);
+        try {
+            System.out.println("sum: ");
+            printMatrix(matrixAddition(m1, m2));
+        } catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+            System.out.println();
+        }
+
+        //point 3 - matrix addition
+        System.out.println("example of matrix addition...");
+        int[][] m3 = randomMatrix(4, 2, 10);
+        System.out.println("first matrix");
+        printMatrix(m3);
+        int[][] m4 = randomMatrix(4, 2, 10);
+        System.out.println("second matrix");
+        printMatrix(m4);
         System.out.println("sum: ");
-        printMatrix(matrixAddition(m1, m2));
+        try {
+            printMatrix(matrixAddition(m3, m4));
+        } catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+            System.out.println();
+        }
 
         //point 6 - find determinant of matrix
-        int[][] m11 = randomMatrix(4, 4, 10);
+        //throw exception
+        int[][] m11 = randomMatrix(4, 3, 10);
         //int[][] m1 = {{8, 1, 5},{0, 8, 7}, {0, 0, 7}};
         System.out.println("lets find the determinant of the matrix ");
         printMatrix(m11);
         System.out.print("the determinant = ");
-        System.out.println(det(m11));
+//        System.out.println(det(m11));
+        try {
+            System.out.println(det(m11));
+        } catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+        }
         System.out.println();
+
+        int[][] m12 = randomMatrix(4, 4, 10);
+        System.out.println("lets find the determinant of the matrix ");
+        printMatrix(m12);
+        System.out.print("the determinant = ");
+//        System.out.println(det(m11));
+        try {
+            System.out.println(det(m12));
+        } catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+        }
+        System.out.println();
+
 
     }
 }

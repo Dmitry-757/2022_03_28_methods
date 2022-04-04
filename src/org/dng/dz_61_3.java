@@ -50,7 +50,10 @@ public class dz_61_3 {
         Random rnd = new Random();
         StringBuilder buf = new StringBuilder();
         for (int i = 0; i < numWord; i++) {
-            int streamSize = rnd.nextInt(3,10);
+            //int streamSize = (new Random()).nextInt(3,10);
+
+            int streamSize = (int)(Math.random() * 8) + 3;
+
             rnd
                 .ints(streamSize,97, 122) //long streamSize, int randomNumberOrigin, int randomNumberBound
                 .forEach(v -> buf.append((char)v));
